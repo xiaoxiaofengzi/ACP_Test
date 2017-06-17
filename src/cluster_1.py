@@ -27,19 +27,20 @@ def distance(lat1,lng1,lat2,lng2):
 
 G = nx.Graph()
 i = 1
-j = 1
+j = 0
 #添加节点
 while i<= 75:
     G.add_node(i)
     i+=1
 #添加链路
 topo=pd.read_excel("./data/Topo_75.xlsx","Sheet1")
-src_No = topo["src.No"]
-dst_No = topo["dst.No"]
-Distance = topo["distance"]
+src_No = list(topo["src.No"])
+dst_No = list(topo["dst.No"])
+Distance = list(topo["distance"])
+# print(len(src_No))
 # print(topo)
-while j <= 99:
-    G.add_edge(int(src_No[j]),int(dst_No[j]),length=float(Distance[j]))
+while j < 99:
+    G.add_edge(src_No[j],dst_No[j],length=Distance[j])
     j = j+1
 nx.draw(G,with_labels=True)
 plt.show()
