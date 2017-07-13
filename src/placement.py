@@ -28,11 +28,7 @@ def distance(lat1,lng1,lat2,lng2):
 G = nx.Graph()
 i = 1
 j = 0
-#添加节点
-while i<= 75:
-    G.add_node(i)
-    i+=1
-#添加链路
+# 读取数据
 topo=pd.read_excel("./data/Topo_75.xlsx","Sheet2")
 src_No = list(topo["src.No"])
 dst_No = list(topo["dst.No"])
@@ -41,13 +37,25 @@ Node=pd.read_excel("./data/Topo_75.xlsx","Sheet1")
 Node_No = list(Node["Node.No"])
 S = len(Node_No) #TODO 节点个数
 E = len(src_No) #TODO 链路个数
+#添加节点
+while i<= S:
+    G.add_node(i)
+    i+=1
+#添加链路
 # print(Node_No)
 # print(len(src_No))
 # print(topo)
 while j < E:
     G.add_edge(src_No[j],dst_No[j],length=Distance[j])
     j = j+1
-nx.draw(G,with_labels=True)
+All_Path_list = []  #TODO 双向链路集
+j=0
+while j<E:
+    All_Path_list.append((src_No[j],dst_No[j]))
+    All_Path_list.append((dst_No[j],src_No[j]))
+    j += 1
+# print(All_Path_list)
+# nx.draw(G,with_labels=True)  #TODO 将图带标签绘制
 # plt.show()
 shortest_paths = nx.all_pairs_shortest_path(G,cutoff=None)
 shortest_path_length=nx.all_pairs_shortest_path_length(G,cutoff=None)
@@ -103,6 +111,64 @@ while src_Node <= S:
         dst_Node += 1
     src_Node += 1
 # P_E_F[0][74] #TODO 第0点和第74点的链路故障概率
+Areas = {}  #FIXME TODO 分好的域序列,字典形式，详情见dict_test.py中d3构造
+def Area_in_Path_Num(Node_list,All_Path_list):  #TODO 域内节点链路判断得出域内链路个数
+    """
+    :param Node_list: 域内节点序列
+    :param All_Path_list: 所有链路序列
+    :return: 域内Edge个数
+    """
+    Path_Num_in = 0
+    for i in Node_list:
+        for j in Node_list[i+1:]:
+            if (i,j) in All_Path_list:
+                Path_Num_in += 1
+            else:
+                Path_Num_in += 0
+    return Path_Num_in
+
+def Area_btw_Path_Num(Node_list1,Node_list2,All_Path_list):    #TODO 域间节点链路判断得出域间链路个数
+    """
+    :param Node_list1: 域1内节点序列
+    :param Node_list2: 域2内节点序列
+    :param All_Path_list: 所有链路序列
+    :return: 域间Edge个数
+    """
+    Path_Num_btw = 0
+    for i in Node_list1:
+        for j in Node_list2:
+            if (i, j) in All_Path_list:
+                Path_Num_btw += 1
+            else:
+                Path_Num_btw += 0
+    return Path_Num_btw
+
+
+
+
+
+def Path_Num2Dict()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # G.add_edge(2,3)
 # print(G.nodes())
