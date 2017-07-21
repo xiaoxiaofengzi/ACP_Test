@@ -144,10 +144,33 @@ def Area_btw_Path_Num(Node_list1,Node_list2,All_Path_list):    #TODO 域间节�
     return Path_Num_btw
 
 
+def Abstract_Node_Num(Node_list,All_Node_list,All_Edge_list):  #TODO 输出抽象后的节点列表
+    """
+    :param Node_list:域内节点序列
+    :param All_Node_list: 所有节点序列
+    :param All_Edge_list: 所有直连路径序列
+    :return: 域内节点抽象后输出的节点列表
+    """
+    Other_Node_list = All_Node_list-Node_list
+    Abstract_Node_list = []
+    for NodeinArea in Node_list:
+        for NodeinOther in Other_Node_list:
+            if ((NodeinArea,NodeinOther) in All_Edge_list) or ((NodeinOther,NodeinArea) in All_Edge_list):
+                Abstract_Node_list.append(NodeinArea)
+            else:
+                Abstract_Node_list.copy()
+    return Abstract_Node_list
+
+def P_E_F(Node_list,All_Edge_list,eta):
+    """
+    :param Node_list: 节点列表
+    :param All_Edge_list: 所有的直连链路列表
+    :param eta: 单位长度故障率
+    :return:
+    """
 
 
-
-def Path_Num2Dict()
+# def Path_Num2Dict()
 
 
 

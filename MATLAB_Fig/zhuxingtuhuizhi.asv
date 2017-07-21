@@ -1,0 +1,8 @@
+clc
+clear
+aa = randn(20,4);
+bb = [1,2,3,3];
+%bar(aa*10);
+figure; 
+bar(aa*10,'stacked');
+bar(bb,'stacked')
