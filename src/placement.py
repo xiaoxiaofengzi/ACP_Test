@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 import networkx as nx
 import matplotlib.pyplot as plt
 import math
@@ -91,7 +92,7 @@ dst_Node = 1
 #TODO 节点序数从0到个数减1
 path_len_max = np.max(D_path_len)  # TODO 最大长度（拓扑直径）
 # print(A)
-# print(D_path_hop[0][18]) # TODO 0节点到1节点跳数
+print(D_path_hop[0][18]) # TODO 0节点到1节点跳数
 # print(D_path_len[0][18]) #TODO 输出点0和点18的最短路径
 # print(G.degree(24))
 
@@ -161,13 +162,13 @@ def Abstract_Node_Num(Node_list,All_Node_list,All_Edge_list):  #TODO 输出抽�
                 Abstract_Node_list.copy()
     return Abstract_Node_list
 
-def P_E_F(Node_list,All_Edge_list,eta):
-    """
-    :param Node_list: 节点列表
-    :param All_Edge_list: 所有的直连链路列表
-    :param eta: 单位长度故障率
-    :return:
-    """
+# def P_E_F(Node_list,All_Edge_list,eta):
+#     """
+#     :param Node_list: 节点列表
+#     :param All_Edge_list: 所有的直连链路列表
+#     :param eta: 单位长度故障率
+#     :return:
+#     """
 
 
 # def Path_Num2Dict()
